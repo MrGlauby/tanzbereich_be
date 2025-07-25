@@ -1,14 +1,16 @@
 // src/app.ts
 import express from "express";
-import authRoutes from "./api/auth/auth.routes"; // <-- IMPORTIEREN
+import authRoutes from "./api/auth/auth.routes";
 
 const app = express();
 
-// Middleware, um JSON aus dem Body der Anfrage zu lesen
 app.use(express.json());
+app.use("/api/auth", authRoutes);
 
-// Alle Routen aus der auth.routes.ts unter dem Pfad /api/auth verwenden
-app.use("/api/auth", authRoutes); // <-- VERWENDEN
+// HIER FEHLT DIE ROUTE - füge sie hier ein:
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'Server ist online!' });
+});
 
 app.listen(3000, () => {
   console.log("Server läuft auf Port 3000");
